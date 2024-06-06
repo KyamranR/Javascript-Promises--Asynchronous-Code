@@ -30,7 +30,11 @@ $(document).ready(function () {
 function fetchNumberFacts(num) {
   const baseUrl = `http://numbersapi.com/${num}`;
 
-  Promise.all(Array.from({ length: 4 }, () => $.getJSON(`${baseUrl}/?json`)))
+  Promise.all(
+    Array.from({ length: 4 }, () => {
+      return $.getJSON(`${baseUrl}/?json`);
+    })
+  )
     .then((facts) => {
       const factTexts = facts.map((fact) => fact.text);
       displayFacts(factTexts);
